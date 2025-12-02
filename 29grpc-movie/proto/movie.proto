@@ -1,0 +1,27 @@
+syntax = "proto3";
+package movie;
+
+option go_package = "./proto";
+
+message Movie{
+    int32 id = 1;
+    string title = 2;
+    bool watched = 3;
+}
+
+message MovieId{
+    int32 id = 1;
+}
+
+message MovieList{
+    repeated Movie movies = 1;
+}
+message Empty {}
+
+service MovieService {
+    rpc GetAllMovies(Empty) returns (MovieList);
+    rpc GetMovieById(MovieId) returns (Movie);
+    rpc UpdateMovieById(Movie) returns (Movie);
+    rpc DeleteMovieById(MovieId) returns (Empty);
+    rpc CreateMovie(Movie) returns (Movie);
+}
